@@ -1,5 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,12 +23,13 @@ import { CmspageModule } from "./cmspage/cmspage.module";
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BlogpostModule,
     CmspageModule,
     TooltipModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [],
+  providers: [Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
