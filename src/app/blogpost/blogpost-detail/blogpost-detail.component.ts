@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap} from '@angular/router';
+import { BlogpostService } from '../blogpost.service';
+import { Title } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-blogpost-detail',
@@ -7,9 +12,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlogpostDetailComponent implements OnInit {
 
-  constructor() { }
+  blog$: Observable<any>;
 
-  ngOnInit() {
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private blogpostService: BlogpostService,
+    private titleService: Title
+    ) { }
+
+    ngOnInit() {
+      this.blog$ = this.route.paramMap.pipe(
+        switchMap((params: ParamMap) =>
+          this.blogpostService.getBlog(+params.get('id'))
+        )
+      );
+
+      this.titleService.setTitle('Blog Detail');
+    }
 
 }

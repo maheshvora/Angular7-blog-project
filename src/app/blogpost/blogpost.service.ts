@@ -26,6 +26,24 @@ export class BlogpostService {
     );
   }
 
+  getBlog(id: number) {
+    return this.http.get<any>(this.ServerUrl + 'api/blog/' + id).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getRecentBlogs() {
+    return this.http.get<any>(this.ServerUrl + 'api/recent_blogs').pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getCategories() {
+    return this.http.get<any>(this.ServerUrl + 'api/categories').pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
 
